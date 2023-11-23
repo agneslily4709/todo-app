@@ -9,6 +9,7 @@ import Profile from "./Components/Profile";
 import { AuthDataContext } from "./Context/AuthContext";
 import "./Styles/styles.css"
 import InputTodo from "./Pages/InputTodo";
+import EditTodo from "./Pages/EditTodo";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
                                                 <Route exact path="/signin" element={<Signin />} />
                                                 <Route exact path="/signout" element={<Signout />} />
                                                 <Route exact path="/profile" element={<Profile />} />
+                                                <Route exact path="/createTodo" element={<InputTodo/>}/>
+                                                <Route exact path="/editTodo/:id" element={<EditTodo/>}/>
                                                 <Route path="*" element={<Errorpage />} />
 
                                         </Routes>
