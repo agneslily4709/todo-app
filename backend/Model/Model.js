@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
@@ -38,3 +38,33 @@ userSchema.methods.generateSessionToken = async function() {
 };
       
 export const UserModel = mongoose.model("user",userSchema)
+
+const todoSchema = new mongoose.Schema({
+        title: {
+          type: String,
+          required: true
+        },
+        description: {
+          type: String,
+          required:true
+        },
+        priority:{
+                type: String,
+                enum: ['High', 'Medium', 'Low'],
+        },
+        status: {
+          type: String,
+          enum: ['Pending', 'In Progress', 'Completed'],
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+        createdBy:{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'user',
+                required:true
+        }
+});
+
+export const TodoModel = mongoose.model("todo",todoSchema)

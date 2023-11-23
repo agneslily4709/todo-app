@@ -1,7 +1,7 @@
 :root {
         --primary-color: #061A40;
         --background-color-1:darkgray;
-        --background0color-2:#E0E0E0;
+        --background-color-2:#E0E0E0;
         --secondary-color:#c5c6c7;
         --tertiary-color:#F5F5F5;
         --accent-color:#fff;
@@ -18,7 +18,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-image: radial-gradient(var(--background-color-1),var(--background0color-2));
+        background-image: radial-gradient(var(--background-color-2),var(--background-color-1));
         justify-content: center;
         height: 100vh;
     }
@@ -81,15 +81,14 @@
 }
 .my-home{
         text-align: center;
-        background-color:var(--tertiary-color);
-        /* width: 700px; */
-        margin: 20px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-        padding: 20px;
         display: flex;
         flex-direction: column;
         border-radius: 10px;
+        margin-top: 70px;
+        height: 100vh;
+        background-image: radial-gradient(var(--background-color-2),var(--background-color-1));
 }
+
 /* Error Img */
 .error-img{
         border-radius: 20px;
