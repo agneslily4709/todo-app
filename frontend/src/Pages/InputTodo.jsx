@@ -54,9 +54,9 @@ const InputTodo = () => {
                                 </select>
                                 <select className='form-select col mx-3' name='status' onChange={handleInputs} value={newTodo.status || ""}>
                                 <option value="none"  hidden>Select todo Status</option>
-                                <option value="Pending">Pending</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Completed">Completed</option>
+                                <option value="Todo">Todo</option>
+                                <option value="InProgress">InProgress</option>
+                                <option value="Done">Done</option>
                                 </select>
                         </div>                
                         <button className='my-button' onClick={PostTodo}>Add Todo</button>
