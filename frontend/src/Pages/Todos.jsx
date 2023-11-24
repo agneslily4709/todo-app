@@ -38,33 +38,33 @@ const Todos = ({todos,setTodos}) => {
               }
   return (
         <>
-        <table className='table table-light container'>
+        {todos  ? 
+        <div className='table-responsive'>
+                        <table className='table table-light container my-table'>
                 <thead>
-                        <tr>
-                                {tableHeaders.map((header,idx)=> (
-                                        <th scope='col' key={idx}>{header}</th>
-                                ))}
-                        </tr>                        
+                        <tr>{tableHeaders.map((header,idx)=> ( <th scope='col' key={idx}>{header}</th>))}</tr>                        
                 </thead>
                 <tbody>
-                        {todos.length>0?
-                        todos.map((todo,idx) => (
+                       {todos && todos.map((todo,idx) => (
                                 <tr key={idx}>
                                         <td>{idx+1}</td>
                                         <td>{todo.title}</td>
                                         <td>{todo.description}</td>
                                         <td>{todo.priority}</td>
                                         <td>{todo.status}</td>
-                                        <td>
-                                                <button className='btn btn-warning mx-2' onClick={()=>navigate(`/editTodo/${todo._id}`)}><AiFillEdit/></button>
-                                                <button className='btn btn-danger mx-2' onClick={()=>handleDelete(todo._id)}><AiFillDelete/></button>
+                                        <td className='d-flex flex-row justify-content-center'>
+                                                <button className='btn btn-warning mx-sm-auto mx-md-2' onClick={()=>navigate(`/editTodo/${todo._id}`)}><AiFillEdit className='action-icons'/></button>
+                                                <button className='btn btn-danger mx-sm-auto mx-md-2' onClick={()=>handleDelete(todo._id)}><AiFillDelete className='action-icons'/></button>
                                         </td>
-                                </tr>
-                        ))
-                        :
-                        <p>No todos found</p>}
+                                </tr> ))}
                 </tbody>
         </table>
+        </div>
+:
+                                <div className=''>
+                                        <h1>No todos found. You can start creating.</h1>
+                                </div>
+                                }
                 <ToastContainer/>
         </>
   )

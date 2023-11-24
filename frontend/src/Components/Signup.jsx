@@ -41,7 +41,7 @@ const PostData = async (e) => {
     <>
         <div className='my-container'>
         <form method="POST"  className='form-component'> 
-        <h3 className='form-title'>Sign Up</h3>
+        <h3 className='form-title'>Signup Form</h3>
             <input className='form-control' placeholder="Enter Full Name"    type="text"    value={user.fullName}    onChange={handleInputs}    name="fullName"/>
             <input className='form-control' onChange={handleInputs}  placeholder="Enter Mail" type="text" value={user.email} name="email"/>
             <input className='form-control' onChange={handleInputs}  placeholder="Enter Password" type="password" value={user.password} name="password"/>
