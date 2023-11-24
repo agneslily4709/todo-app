@@ -15,8 +15,8 @@ const Profile = () => {
                 setUserData(data);
         }
         } catch (error) {
-        const errorMessage = error.response ? error.response.data.message : "An error occurred";
-        toast.error(errorMessage, { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000 })
+                const errorMessage = error.response ? error.response.data.message : "An error occurred";
+                toast.error(errorMessage, { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000 })
         }
   }
 useEffect(() => {

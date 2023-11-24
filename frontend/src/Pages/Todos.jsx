@@ -1,6 +1,6 @@
-import React,{useEffect,useCallback} from 'react'
+import React,{useEffect} from 'react'
 import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SERVER_URL } from '../Utils/globals';
@@ -38,7 +38,7 @@ const Todos = ({todos,setTodos}) => {
               }
   return (
         <>
-        {todos  ? 
+        {todos.length>0  ? 
         <div className='table-responsive'>
                         <table className='table table-light container my-table'>
                 <thead>
@@ -59,12 +59,10 @@ const Todos = ({todos,setTodos}) => {
                                 </tr> ))}
                 </tbody>
         </table>
-        </div>
-:
-                                <div className=''>
-                                        <h1>No todos found. You can start creating.</h1>
-                                </div>
-                                }
+        </div>:
+                <div className=''>
+                        <h1>No todos found. You can start creating.</h1>
+                </div>}
                 <ToastContainer/>
         </>
   )

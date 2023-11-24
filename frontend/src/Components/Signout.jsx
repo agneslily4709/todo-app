@@ -12,17 +12,18 @@ const Signout = () => {
 
     const handleSignOut =useCallback( async() => {
         try{
-        const response =await  axios.get(`${SERVER_URL}/signout`,{withCredentials:true});
-        if(response.status === 200 ){
-                toast.success("SignOut Successful",{ position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000,})
-                setUserState(false)
-                navigate('/signin');
-            }
+                const response =await  axios.get(`${SERVER_URL}/signout`,{withCredentials:true});
+                if(response.status === 200 ){
+                        toast.success("SignOut Successful",{ position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000,})
+                        setUserState(false)
+                        navigate('/signin');
+                }
         } catch (error) {
                 const errorMessage = error.response ? error.response.data.message : "An error occurred";
                 toast.error(errorMessage, { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000 })
         }
     },[navigate,setUserState])
+    
     useEffect(()=>{
         handleSignOut()
 },[handleSignOut])
