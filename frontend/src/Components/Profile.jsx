@@ -1,0 +1,41 @@
+import {React,useState,useEffect} from 'react'
+import '../Styles/styles.css'
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { SERVER_URL } from '../Utils/globals';
+
+const Profile = () => {
+  const [userData,setUserData] = useState({});
+  const callProfilePage = async () =>{
+    try{
+      const response =await axios.get(`${SERVER_URL}/getUserData`,{withCredentials:true});
+      if(response.status === 200 ){
+                const data =  response.data;
+                setUserData(data);
+        }
+        } catch (error) {
+                const errorMessage = error.response ? error.response.data.message : "An error occurred";
+                toast.error(errorMessage, { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000 })
+        }
+  }
+useEffect(() => {
+  callProfilePage();
+}, [])
+  return (
+   <>
+   <div className="my-container">
+        <div className='profile-details'>
+        <h3 className='profile-title'>Profile</h3>
+            <p className='profile-item'>Name : {userData.fullName}</p>
+            <p className='profile-item'>Email : {userData.email}</p>
+            {/* <p className='profile-item'>Diet Preference : {userData.dietPreference}</p>
+            <p className='profile-item'>Location : {userData.location}</p> */}
+        </div>
+   </div>
+   <ToastContainer/>
+   </>
+  )
+}
+
+export default Profile;
