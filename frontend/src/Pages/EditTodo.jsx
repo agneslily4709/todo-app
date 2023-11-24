@@ -53,9 +53,9 @@ const EditTodo = () => {
                                 </select>
                                 <select className='form-select col mx-3' name='status' onChange={handleInputs} value={editTodo.status }>
                                 <option value="none"  hidden>Select todo Status</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Doing">Doing</option>
-                                <option value="Completed">Completed</option>
+                                <option value="Todo">Todo</option>
+                                <option value="InProgress">InProgress</option>
+                                <option value="Done">Done</option>
                                 </select>
                         </div>                
                         <button className='my-button' onClick={EditTodo}>Edit Todo</button>
