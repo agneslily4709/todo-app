@@ -8,7 +8,7 @@ import axios from "axios"
 const EditTodo = () => {
         const params = useParams()
         const navigate = useNavigate()
-        const [editTodo, setEditTodo] = useState({title:"",description:"",priority:"",status:""})
+        const [editTodo, setEditTodo] = useState({})
         const handleInputs = (e) =>{
             setEditTodo({...editTodo,[e.target.name]:e.target.value});
       }
@@ -36,7 +36,7 @@ const EditTodo = () => {
       }
       useEffect(()=>{
         callTodo()
-      },[callTodo])
+      },[])
   return (
         <>
                 <div className='my-container'>
@@ -51,7 +51,7 @@ const EditTodo = () => {
                                 <option value="Medium">Medium</option>
                                 <option value="Low">Low</option>
                                 </select>
-                                <select className='form-select col mx-3' name='status' onChange={handleInputs} value={editTodo.status}>
+                                <select className='form-select col mx-3' name='status' onChange={handleInputs} value={editTodo.status }>
                                 <option value="none"  hidden>Select todo Status</option>
                                 <option value="Pending">Pending</option>
                                 <option value="Doing">Doing</option>

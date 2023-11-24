@@ -59,6 +59,7 @@ const todoSchema = new mongoose.Schema({
         createdAt: {
           type: Date,
           default: Date.now,
+        immutable:true
         },
         createdBy:{
                 type: mongoose.Schema.Types.ObjectId,

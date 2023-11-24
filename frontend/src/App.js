@@ -14,7 +14,6 @@ import EditTodo from "./Pages/EditTodo";
 function App() {
   return (
         <>
-                <div className="App">
                 <AuthDataContext>
                         <BrowserRouter>
                                 <Navbar/>
@@ -27,11 +26,9 @@ function App() {
                                                 <Route exact path="/createTodo" element={<InputTodo/>}/>
                                                 <Route exact path="/editTodo/:id" element={<EditTodo/>}/>
                                                 <Route path="*" element={<Errorpage />} />
-
                                         </Routes>
                                 </BrowserRouter>
                         </AuthDataContext>
-                </div>
         </>
   );
 }

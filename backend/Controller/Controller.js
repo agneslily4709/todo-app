@@ -32,13 +32,13 @@ export const signInUser = async (req, res) => {
                 
                 const token = await user.generateSessionToken();
                 //production
-                // res.cookie("jwtoken", token, { httpOnly: true, expires: new Date(Date.now() + 3600000), secure: true, sameSite:'none' })
+                res.cookie("jwtoken", token, { httpOnly: true, expires: new Date(Date.now() + 3600000), secure: true, sameSite:'none' })
                 //development
-                res.cookie("jwtoken", token, { httpOnly: false, expires: new Date(Date.now() + 3600000), secure: true, sameSite:'none' })
+                // res.cookie("jwtoken", token, { httpOnly: false, expires: new Date(Date.now() + 3600000), secure: true, sameSite:'none' })
                 res.status(200).json(user);
         } 
         catch (error) {
-                res.status(404).json({ message: "Signin Error" +error});
+                res.status(404).json({ message: "Signin Error"});
         }
 };
 
@@ -58,7 +58,7 @@ export const createTodo = async(req,res) => {
                 await newTodo.save()
                 res.status(200).json(newTodo);
         } catch (error) {
-                res.status(404).json({ message: "An error occured"+error });
+                res.status(404).json({ message: "Create Todo error" });
         }
 }
 
@@ -68,7 +68,7 @@ export const getTodos = async(req,res) => {
                 const userTodos = await TodoModel.find({createdBy:userId})
                 res.status(200).json(userTodos)
         } catch (error) {
-                res.status(404).json({ message: "An error occured"});
+                res.status(404).json({ message: "Get Todos Error"});
         }
 }
 
@@ -78,10 +78,9 @@ export const getTodo = async(req,res) => {
                 const userTodos = await TodoModel.findOne({_id:id})
                 res.status(200).json(userTodos)
         } catch (error) {
-                res.status(404).json({ message: "An error occured"});
+                res.status(404).json({ message: "Get Todo Error"});
         }
 }
-
 
 export const deleteTodo = async(req,res) => {
         try {
@@ -90,7 +89,7 @@ export const deleteTodo = async(req,res) => {
                 if (!todo)  return res.status(404).json({ error: 'Todo not found' });
                 res.status(200).json({ message: 'Todo deleted successfully' });   
         } catch (error) {
-                res.status(404).json({ message: "An error occured" +error});
+                res.status(404).json({ message: "Delete Todo Error"});
         }
 }
 
@@ -102,6 +101,6 @@ export const editTodo = async (req, res) => {
           if (!todo) return res.status(404).json({ error: 'Todo not found' });
           res.status(200).json(todo);
         } catch (error) {
-                res.status(404).json({ message: "An error occured" });
+                res.status(404).json({ message: "Edit Todo Error" });
         }
 };

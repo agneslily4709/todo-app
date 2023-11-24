@@ -8,9 +8,11 @@ import axios from "axios"
 const InputTodo = () => {
         const navigate = useNavigate()
         const [newTodo, setNewTodo] = useState({title:"",description:"",priority:"",status:""})
+        
         const handleInputs = (e) =>{
             setNewTodo({...newTodo,[e.target.name]:e.target.value});
       }
+      
       const dataValidation = () => {
         for (let property in newTodo) {
           const value = newTodo[property];
@@ -21,6 +23,7 @@ const InputTodo = () => {
         }
         return true;
       };
+      
       const PostTodo = async (e) =>{
         e.preventDefault();
         if(!dataValidation())return
