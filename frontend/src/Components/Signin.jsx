@@ -4,7 +4,6 @@ import '../Styles/styles.css';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Cookies from 'js-cookie';
 import { AuthContext } from '../Context/AuthContext';
 import { SERVER_URL } from '../Utils/globals';
 

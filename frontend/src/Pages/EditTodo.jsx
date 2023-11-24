@@ -29,7 +29,6 @@ const EditTodo = () => {
         try {
                 const response = await axios.get(`${SERVER_URL}/getTodo/${params.id}`,{withCredentials:true})
                 if(response.status === 200) setEditTodo(response.data)
-                console.log(response.data);
         } catch (error) {
                 const errorMessage = error.response ? error.response.data.message : "An error occurred";
                 toast.error(errorMessage, { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000 })
@@ -37,7 +36,7 @@ const EditTodo = () => {
       }
       useEffect(()=>{
         callTodo()
-      },[])
+      },[callTodo])
   return (
         <>
                 <div className='my-container'>
@@ -55,7 +54,7 @@ const EditTodo = () => {
                                 <select className='form-select col mx-3' name='status' onChange={handleInputs} value={editTodo.status}>
                                 <option value="none"  hidden>Select todo Status</option>
                                 <option value="Pending">Pending</option>
-                                <option value="In Progress">In Progress</option>
+                                <option value="Doing">Doing</option>
                                 <option value="Completed">Completed</option>
                                 </select>
                         </div>                
