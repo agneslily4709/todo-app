@@ -3,14 +3,13 @@ import cors from "cors"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import router from "./Router/Router.js"
-import cookieParser from "cookie-parser"
-
+import {headersMiddleware} from "./Middleware/Middleware.js"
 const app = express()
 dotenv.config()
 app.use(express.json());
-app.use(cookieParser())
-app.use(cors({ origin: true, credentials: true ,exposedHeaders: ["Set-Cookie"]}));
 
+app.use(cors({ origin: true, credentials: true }));
+app.use(headersMiddleware)
 app.use("/api",router)
 
 const DB_URL = process.env.DB_URL

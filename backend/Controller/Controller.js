@@ -29,12 +29,8 @@ export const signInUser = async (req, res) => {
                         
                 const passwordValidation = await bcrypt.compare(password,user.password);
                 if (!passwordValidation) return res.status(401).json({ message: "Password is incorrect" })
-                
                 const token = await user.generateSessionToken();
-                //production
-                // res.cookie("jwtoken", token, { httpOnly: true, expires: new Date(Date.now() + 3600000), secure: true, sameSite:'none' })
-                //development
-                res.cookie("jwtoken", token, { httpOnly: true, expires: new Date(Date.now() + 3600000), secure: true, sameSite:'none' })
+                res.setHeader("X-Auth-Token", token);
                 res.status(200).json(user);
         } 
         catch (error) {
@@ -47,7 +43,8 @@ export const getUserData = (req, res) =>{
 }
 
 export const signOutUser = (req, res)=> {
-        res.clearCookie("jwtoken", { path: "/" });
+        const token = req.token
+        
         res.status(200).send(`userLogout`);
 }
 

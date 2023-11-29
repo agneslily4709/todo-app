@@ -5,13 +5,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SERVER_URL } from '../Utils/globals';
 import { AiFillDelete,AiFillEdit } from "react-icons/ai";
+import Cookies from 'js-cookie';
 
 const Todos = ({todos,setTodos}) => {
+        const token = Cookies.get("jwtoken")
         const navigate = useNavigate()
         const tableHeaders = ["S.No","Title","Description","Priority","Status","Actions"]
         const callAllTodos = async () => {
                 try {
-                  const response = await axios.get(`${SERVER_URL}/getTodos`, { withCredentials: true });
+                  const response = await axios.get(`${SERVER_URL}/getTodos`, { withCredentials: true,headers: { Authorization: `Bearer ${token}`} });
                   if (response.status === 200) {
                         const data = response.data;
                         setTodos(data)
@@ -28,7 +30,7 @@ const Todos = ({todos,setTodos}) => {
 
               const handleDelete = async(id) => {
                 try {
-                        const response = await axios.delete(`${SERVER_URL}/deleteTodo/${id}`, { withCredentials: true });
+                        const response = await axios.delete(`${SERVER_URL}/deleteTodo/${id}`, { withCredentials: true,headers: { Authorization: `Bearer ${token}`} });
                         setTodos((prevTodos)=>prevTodos.filter((ele)=>ele._id !== id))
                         if(response.status === 200) toast.success("Todo Deleted",{ position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000})
                       } catch (error) {
