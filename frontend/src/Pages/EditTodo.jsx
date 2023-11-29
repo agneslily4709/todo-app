@@ -4,10 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { SERVER_URL } from '../Utils/globals';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios"
+import Cookies from 'js-cookie';
 
 const EditTodo = () => {
         const params = useParams()
         const navigate = useNavigate()
+        const token = Cookies.get("jwtoken")
         const [editTodo, setEditTodo] = useState({})
         const handleInputs = (e) =>{
             setEditTodo({...editTodo,[e.target.name]:e.target.value});
@@ -15,7 +17,7 @@ const EditTodo = () => {
       const EditTodo = async (e) =>{
         e.preventDefault();
         try {
-                const response = await axios.put(`${SERVER_URL}/editTodo/${params.id}`, editTodo,{withCredentials:true})
+                const response = await axios.put(`${SERVER_URL}/editTodo/${params.id}`, editTodo,{withCredentials:true,headers: { Authorization: `Bearer ${token}`}})
                 if(response.status === 200 ){
                         toast.success("Todo Edited",{ position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000})
                         setTimeout(()=>navigate("/"),2000)
@@ -27,7 +29,7 @@ const EditTodo = () => {
       }
       const callTodo = async() => {
         try {
-                const response = await axios.get(`${SERVER_URL}/getTodo/${params.id}`,{withCredentials:true})
+                const response = await axios.get(`${SERVER_URL}/getTodo/${params.id}`,{withCredentials:true,headers: { Authorization: `Bearer ${token}`}})
                 if(response.status === 200) setEditTodo(response.data)
         } catch (error) {
                 const errorMessage = error.response ? error.response.data.message : "An error occurred";

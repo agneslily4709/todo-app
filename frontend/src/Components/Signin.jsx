@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../Context/AuthContext';
 import { SERVER_URL } from '../Utils/globals';
+import Cookies from 'js-cookie';
 
 const Signin = () => {
         const {setUserState} = useContext(AuthContext)
@@ -29,9 +30,10 @@ const Signin = () => {
         if(!dataValidation())return
         try {
                 const response =await  axios.post(`${SERVER_URL}/signin`,user,{withCredentials:true});
-                
+                const authToken = response.headers['x-auth-token'];
                 if(response.status === 200 ){
                         toast.success("SignIn Successful",{ position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000})
+                        Cookies.set("jwtoken",authToken,{path:"/"})
                         setUserState(true)
                         setTimeout(()=>navigate("/"),2000)
                 }

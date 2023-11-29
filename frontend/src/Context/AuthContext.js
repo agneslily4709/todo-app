@@ -5,7 +5,6 @@ const AuthContext = createContext(null)
 const AuthDataContext = ({children}) => {
 
         const [userState,setUserState]  = useState(false)  
-        
         useEffect(()=>{
                 if(Cookies.get("jwtoken")) setUserState(true)
         },[])

@@ -4,12 +4,15 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SERVER_URL } from '../Utils/globals';
+import Cookies from 'js-cookie';
 
 const Profile = () => {
   const [userData,setUserData] = useState({});
+  const token = Cookies.get("jwtoken")
+
   const callProfilePage = async () =>{
     try{
-      const response =await axios.get(`${SERVER_URL}/getUserData`,{withCredentials:true});
+      const response =await axios.get(`${SERVER_URL}/getUserData`,{withCredentials:true,headers: { Authorization: `Bearer ${token}`}});
       if(response.status === 200 ){
                 const data =  response.data;
                 setUserData(data);

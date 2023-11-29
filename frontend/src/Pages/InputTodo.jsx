@@ -4,9 +4,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { SERVER_URL } from '../Utils/globals';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
+import Cookies from 'js-cookie';
 
 const InputTodo = () => {
         const navigate = useNavigate()
+        const token = Cookies.get("jwtoken")
         const [newTodo, setNewTodo] = useState({title:"",description:"",priority:"",status:""})
         
         const handleInputs = (e) =>{
@@ -28,7 +30,7 @@ const InputTodo = () => {
         e.preventDefault();
         if(!dataValidation())return
         try {
-                const response = await axios.post(`${SERVER_URL}/createTodo`, newTodo,{withCredentials:true})
+                const response = await axios.post(`${SERVER_URL}/createTodo`, newTodo,{withCredentials:true,headers: { Authorization: `Bearer ${token}`}})
                 if(response.status === 200 ){
                         toast.success("Todo Posted",{ position: toast.POSITION.BOTTOM_RIGHT, autoClose: 1000})
                         setTimeout(()=>navigate("/"),2000)
