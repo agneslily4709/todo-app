@@ -44,7 +44,10 @@ export const getUserData = (req, res) =>{
 
 export const signOutUser = (req, res)=> {
         const token = req.token
-        
+        //expire token
+        const user = req.user
+        console.log(user);
+        console.log(token);
         res.status(200).send(`userLogout`);
 }
 
